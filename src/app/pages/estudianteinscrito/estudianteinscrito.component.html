@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-header bg-black text-white">
+        <h1 class="h4 mb-0">Listado de Estudiantes Inscritos</h1>
+      </div>
+  
+      <div class="card-body">
+        @if(errorMessage){
+          <div class="alert alert-danger">{{ errorMessage }}</div>
+        }
+        
+        @if(cargando){
+          <div class="alert alert-info">Cargando estudiantes...</div>
+        } @else if(estudiantes.length === 0) {
+          <div class="alert alert-info">No hay estudiantes inscritos</div>
+        } @else {
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Edad</th>
+                  <th>Email</th>
+                  <th>Carrera</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(estudiante of estudiantes; track estudiante.id){
+                  <tr>
+                    <td>{{ estudiante.id }}</td>
+                    <td>{{ estudiante.nombre }}</td>
+                    <td>{{ estudiante.apellido }}</td>
+                    <td>{{ estudiante.edad }}</td>
+                    <td>{{ estudiante.email }}</td>
+                    <td>{{ getNombreCarrera(estudiante.id_carrera) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+  </div>

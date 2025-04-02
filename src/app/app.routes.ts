@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './auth.guard';
 import { EstudianteComponent } from './pages/estudiante/estudiante.component';
 import { CarreraComponent } from './pages/carrera/carrera.component';
+import { EstudianteinscritoComponent } from './pages/estudianteinscrito/estudianteinscrito.component';
 
 export const routes: Routes = [
     {
@@ -18,11 +19,15 @@ export const routes: Routes = [
             {
                 path: 'carrera',
                 component: CarreraComponent,
-                // Si CarreraComponent es standalone, no necesita declaración en módulos
             },
             {
                 path: 'estudiante',
                 component: EstudianteComponent,
+            },
+            {
+                path: 'estudianteinscrito',
+                component: EstudianteinscritoComponent
+
             },
             {
                 path: '',

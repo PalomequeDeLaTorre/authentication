@@ -1,13 +1,12 @@
-export interface Estudiante {
+export interface Estudianteinscrito {
     id: string;
     id_carrera: string;
     nombre: string;
     apellido: string;
     edad: string;
     email: string;
-    idOriginal?: string; 
 }
 
-export interface EstudianteWithCarrera extends Estudiante {
+export interface EstudianteinscritoWithCarrera extends Estudianteinscrito {
     nombreCarrera?: string;
 }
