@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-start" data-bs-theme="dark" 
+     style="width: 250px; height: 100vh; position: fixed; left: 0; top: 0; 
+     box-shadow: 2px 0 10px rgba(0,0,0,0.1);">
+  <div class="container-fluid flex-column h-100 p-0">
+
+      <div class="w-100 p-3 text-center border-bottom border-secondary">
+          <a class="navbar-brand d-flex align-items-center justify-content-center" routerLink="/home">
+             <!-- <img src="/home.jpg" alt="Logo" class="rounded-circle me-2" width="40" height="40"> -->
+              <span class="fs-9 fw-semibold">Universidad del Río</span>
+          </a>
+      </div>
+
+      <div class="flex-grow-1 w-100 overflow-auto">
+          <div class="px-3">
+              <ul class="navbar-nav flex-column w-100 gap-1">
+                  <li class="nav-item">
+                      <a class="nav-link d-flex align-items-center py-2 rounded" routerLink="carrera" routerLinkActive="active bg-primary">
+                          <i class="bi bi-book me-2"></i> Carreras
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link d-flex align-items-center py-2 rounded" routerLink="estudiante" routerLinkActive="active bg-primary">
+                        <i class="bi bi-clipboard2-check me-2"></i>Inscripciones
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center py-2 rounded" routerLink="estudiante" routerLinkActive="active bg-primary">
+                        <i class="bi bi-people-fill me-2"></i>Estudiantes Inscritos
+                    </a>
+                </li>
+              </ul>
+          </div>
+      </div>
+
+      <div class="w-100 p-3 border-top border-secondary">
+        <button type="button" class="btn btn-warning w-100 d-flex align-items-center justify-content-center" (click)="salir()">
+            <i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión
+        </button>
+    </div>
+    
+  </div>
+</nav>
+<main style="margin-left: 250px; padding: 20px;">
+  <router-outlet></router-outlet>
+</main>
+
