@@ -89,7 +89,6 @@ export class CarreraComponent {
       return;
     }
 
-    // Validar si el ID fue modificado y ya existe
     if (this.carrera.idOriginal !== this.carrera.id && 
         this.carreras.some(c => c.id === this.carrera.id)) {
       this.errorMessage = 'El nuevo ID de carrera ya existe';

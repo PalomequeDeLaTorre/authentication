@@ -43,9 +43,9 @@ export class CarreraService {
 
   async modificarCarrera(carrera: Carrera): Promise<void> {
     try {
-      // Si el ID cambió (tenemos idOriginal y es diferente)
+
       if (carrera.idOriginal && carrera.idOriginal !== carrera.id) {
-        // Crear nuevo documento con el nuevo ID
+ 
         const nuevoDoc = doc(this.firestore, `carreras/${carrera.id}`);
         await setDoc(nuevoDoc, {
           nombre: carrera.nombre,
@@ -53,11 +53,10 @@ export class CarreraService {
           duracion: carrera.duracion
         });
         
-        // Eliminar el documento antiguo
         const viejoDoc = doc(this.firestore, `carreras/${carrera.idOriginal}`);
         await deleteDoc(viejoDoc);
       } else {
-        // Actualización normal (ID no cambió)
+   
         const carreraDoc = doc(this.firestore, `carreras/${carrera.id}`);
         await updateDoc(carreraDoc, {
           nombre: carrera.nombre,
