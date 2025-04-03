@@ -88,9 +88,34 @@ export class EstudianteComponent {
     return carrera ? carrera.nombre : 'Carrera no encontrada';
   }
 
+
+  isValidIdFormat(): boolean {
+    return /^\d+$/.test(this.estudiante.id || '');
+  }
+
+  isValidIdValue(): boolean {
+    if (!this.isValidIdFormat()) return false;
+    return parseInt(this.estudiante.id || '0') > 0;
+  }
+
+  isIdValid(): boolean {
+    return this.isValidIdFormat() && this.isValidIdValue();
+  }
+
+
   async insertarEstudiante() {
     this.mostrarErrores = true;
     this.errorMessage = null;
+
+    if (!this.isValidIdFormat()) {
+      this.errorMessage = 'El ID solo puede contener números';
+      return;
+    }
+
+    if (!this.isValidIdValue()) {
+      this.errorMessage = 'El ID debe ser un número mayor a 0';
+      return;
+    }
 
     if (!this.isFormValid()) {
       this.errorMessage = 'Todos los campos son obligatorios';

@@ -53,9 +53,34 @@ export class CarreraComponent {
     });
   }
 
+
+  isValidIdFormat(): boolean {
+    return /^\d+$/.test(this.carrera.id || '');
+  }
+
+  isValidIdValue(): boolean {
+    if (!this.isValidIdFormat()) return false;
+    return parseInt(this.carrera.id || '0') > 0;
+  }
+
+  isIdValid(): boolean {
+    return this.isValidIdFormat() && this.isValidIdValue();
+  }
+  
+
   async insertarCarrera() {
     this.mostrarErrores = true;
     this.errorMessage = null;
+
+    if (!this.isValidIdFormat()) {
+      this.errorMessage = 'El ID solo puede contener números';
+      return;
+    }
+
+    if (!this.isValidIdValue()) {
+      this.errorMessage = 'El ID debe ser un número mayor a 0';
+      return;
+    }
 
     if (!this.isFormValid()) {
       this.errorMessage = 'Todos los campos son obligatorios';
@@ -92,6 +117,16 @@ export class CarreraComponent {
   async updateCarrera() {
     this.mostrarErrores = true;
     this.errorMessage = null;
+
+    if (!this.isValidIdFormat()) {
+      this.errorMessage = 'El ID solo puede contener números';
+      return;
+    }
+
+    if (!this.isValidIdValue()) {
+      this.errorMessage = 'El ID debe ser un número mayor a 0';
+      return;
+    }
 
     if (!this.isFormValid()) {
       this.errorMessage = 'Todos los campos son obligatorios';
@@ -158,7 +193,7 @@ export class CarreraComponent {
     console.error(`Error al ${action} carrera:`, error);
     this.errorMessage = error instanceof Error ? error.message : `Error al ${action} la carrera`;
   }
-
+  
   isFormValid(): boolean {
     return !!this.carrera.id?.trim() &&
            !!this.carrera.nombre?.trim() &&

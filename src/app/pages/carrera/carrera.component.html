@@ -22,12 +22,19 @@
             
             <form (submit)="$event.preventDefault(); enModoEdicion ? updateCarrera() : insertarCarrera()">
               <div class="mb-3">
-                <label class="form-label">ID:</label>
-                <input type="text" class="form-control" [(ngModel)]="carrera.id" name="id" [disabled]="enModoEdicion">
-                @if(mostrarErrores && (!carrera.id || carrera.id.trim().length === 0)){
-                  <div class="text-danger">El ID es obligatorio</div>
-                }
-              </div>
+
+                  <label class="form-label">ID:</label>
+                  <input type="text" class="form-control" [(ngModel)]="carrera.id" name="id" [disabled]="enModoEdicion">
+                  @if(mostrarErrores && (!carrera.id || carrera.id.trim().length === 0)){
+                    <div class="text-danger">El ID es obligatorio</div>
+                  }
+                  @if(mostrarErrores && carrera.id && !isValidIdFormat()){
+                    <div class="text-danger">El ID solo puede contener números</div>
+                  }
+                  @if(mostrarErrores && carrera.id && isValidIdFormat() && !isValidIdValue()){
+                    <div class="text-danger">El ID debe ser mayor a 0</div>
+                  }
+                </div>
 
               <div class="mb-3">
                 <label class="form-label">Nombre:</label>

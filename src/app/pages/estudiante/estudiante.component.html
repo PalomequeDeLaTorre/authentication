@@ -27,6 +27,12 @@
                 @if(mostrarErrores && (!estudiante.id || estudiante.id.trim().length === 0)){
                   <div class="text-danger">El ID es obligatorio</div>
                 }
+                @if(mostrarErrores && estudiante.id && !isValidIdFormat()){
+                  <div class="text-danger">El ID solo puede contener números</div>
+                }
+                @if(mostrarErrores && estudiante.id && isValidIdFormat() && !isValidIdValue()){
+                  <div class="text-danger">El ID debe ser mayor a 0</div>
+                }
               </div>
   
               <div class="mb-3">
