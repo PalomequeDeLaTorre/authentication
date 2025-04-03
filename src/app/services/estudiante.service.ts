@@ -45,14 +45,31 @@ export class EstudianteService {
 
   async modificarEstudiante(estudiante: Estudiante): Promise<void> {
     try {
-      const estudianteDoc = doc(this.firestore, `estudiantes/${estudiante.id}`);
-      await updateDoc(estudianteDoc, {
+
+      if (estudiante.idOriginal && estudiante.idOriginal !== estudiante.id) {
+
+      const nuevoDoc = doc(this.firestore, `estudiantes/${estudiante.id}`);
+      await setDoc(nuevoDoc, {
         id_carrera: estudiante.id_carrera,
         nombre: estudiante.nombre,
         apellido: estudiante.apellido,
         edad: estudiante.edad,
         email: estudiante.email
       });
+
+        const viejoDoc = doc(this.firestore, `estudiantes/${estudiante.idOriginal}`);
+        await deleteDoc(viejoDoc);
+      } else {
+     
+        const estudianteDoc = doc(this.firestore, `estudiantes/${estudiante.id}`);
+        await updateDoc(estudianteDoc, {
+          id_carrera: estudiante.id_carrera,
+          nombre: estudiante.nombre,
+          apellido: estudiante.apellido,
+          edad: estudiante.edad,
+          email: estudiante.email
+        });
+      }
     } catch (error) {
       console.error('Error Firestore al modificar estudiante:', error);
       throw new Error('Error al actualizar el estudiante.');

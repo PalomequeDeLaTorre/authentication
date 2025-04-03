@@ -19,12 +19,13 @@ export class EstudianteComponent {
   carreras: Carrera[] = [];
   estudiante: Partial<Estudiante> = {
     id: '',
+    idOriginal: '',
     id_carrera: '',
     nombre: '',
     apellido: '',
     edad: '',
     email: '',
-    idOriginal: ''
+
   };
   mostrarErrores = false;
   enModoEdicion = false;
@@ -128,6 +129,11 @@ export class EstudianteComponent {
       return;
     }
 
+    if (!this.carreras.some(c => c.id === this.estudiante.id_carrera)) {
+      this.errorMessage = 'La carrera seleccionada no es válida';
+      return;
+    }
+
     try {
       this.cargando = true;
       await this.estudianteService.agregarEstudiante(this.estudiante as Estudiante);
@@ -154,12 +160,21 @@ export class EstudianteComponent {
     this.mostrarErrores = true;
     this.errorMessage = null;
 
+    if (!this.isValidIdFormat()) {
+      this.errorMessage = 'El ID solo puede contener números';
+      return;
+    }
+
+    if (!this.isValidIdValue()) {
+      this.errorMessage = 'El ID debe ser un número mayor a 0';
+      return;
+    }
+
     if (!this.isFormValid()) {
       this.errorMessage = 'Todos los campos son obligatorios';
       return;
     }
 
-    // Validar si el ID fue modificado y ya existe
     if (this.estudiante.idOriginal && this.estudiante.idOriginal !== this.estudiante.id && 
       this.estudiantes.some(e => e.id === this.estudiante.id)) {
       this.errorMessage = 'El nuevo ID de estudiante ya existe';
@@ -202,12 +217,13 @@ export class EstudianteComponent {
   private resetForm() {
     this.estudiante = {
       id: '',
+      idOriginal: '',
       id_carrera: '',
       nombre: '',
       apellido: '',
       edad: '',
-      email: '',
-      idOriginal: ''
+      email: ''
+      
     };
     this.mostrarErrores = false;
     this.enModoEdicion = false;
