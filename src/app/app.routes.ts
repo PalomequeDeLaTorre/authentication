@@ -19,6 +19,7 @@ export const routes: Routes = [
             {
                 path: 'carrera',
                 component: CarreraComponent,
+                
             },
             {
                 path: 'estudiante',
@@ -26,7 +27,7 @@ export const routes: Routes = [
             },
             {
                 path: 'estudianteinscrito',
-                component: EstudianteinscritoComponent
+                component: EstudianteinscritoComponent,
 
             },
             {

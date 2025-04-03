@@ -4,12 +4,13 @@ import { CarreraService } from '../../services/carrera.service';
 import { FormsModule } from '@angular/forms';
 import { Estudiante, EstudianteWithCarrera } from '../../models/estudiante.models';
 import { Carrera } from '../../models/carrera.models';
-import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-estudiante',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   templateUrl: './estudiante.component.html',
   styleUrls: ['./estudiante.component.css']
 })
@@ -29,13 +30,22 @@ export class EstudianteComponent {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   cargando = false;
+  estaAutenticado = false;
 
   constructor(
     private estudianteService: EstudianteService,
-    private carreraService: CarreraService
+    private carreraService: CarreraService,
+    private authService: AuthService
   ) {
     this.loadEstudiantes();
     this.loadCarreras();
+    this.verificarAutenticacion();
+  }
+
+  private verificarAutenticacion() {
+    this.authService.user$.subscribe(user => {
+      this.estaAutenticado = !!user;
+    });
   }
 
   loadEstudiantes(): void {

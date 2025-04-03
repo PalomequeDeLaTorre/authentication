@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CarreraService } from '../../services/carrera.service';
 import { FormsModule } from '@angular/forms';
 import { Carrera } from '../../models/carrera.models';
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-carrera',
@@ -23,9 +24,17 @@ export class CarreraComponent {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   cargando = false;
+  estaAutenticado = false; 
 
-  constructor(private carreraService: CarreraService) {
+  constructor(private carreraService: CarreraService, private authService: AuthService) {
     this.loadCarreras();
+    this.verificarAutenticacion();
+  }
+
+  private verificarAutenticacion() {
+    this.authService.user$.subscribe(user => {
+      this.estaAutenticado = !!user;
+    });
   }
 
   loadCarreras(): void {

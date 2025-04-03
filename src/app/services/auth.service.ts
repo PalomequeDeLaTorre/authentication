@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, user, User, browserLocalPersistence, 
-  signInWithEmailAndPassword, signOut 
+import { Auth, user, User, signInWithEmailAndPassword, signOut 
 } from '@angular/fire/auth';
 import { browserSessionPersistence, setPersistence } from 'firebase/auth';
 import { from, Observable } from 'rxjs';

@@ -1,128 +1,135 @@
 <div class="container mt-4">
-  <div class="card">
-    <div class="card-header bg-black text-white">
-      <h1 class="h4 mb-0">Gestión de Carreras</h1>
-    </div>
+  @if(estaAutenticado) {
+    <div class="card">
+      <div class="card-header bg-black text-white">
+        <h1 class="h4 mb-0">Gestión de Carreras</h1>
+      </div>
 
-    <div class="card-body">
-      @if(errorMessage){
-        <div class="alert alert-danger">{{ errorMessage }}</div>
-      }
-      @if(successMessage){
-        <div class="alert alert-success">{{ successMessage }}</div>
-      }
-      @if(cargando){
-        <div class="alert alert-info">Procesando, por favor espere...</div>
-      }
-      
-      <div class="row">
-        <div class="col-md-6">
-          <h2 class="h5 mb-3">Alta de Carreras</h2>
-          
-          <form (submit)="$event.preventDefault(); enModoEdicion ? updateCarrera() : insertarCarrera()">
-            <div class="mb-3">
-              <label class="form-label">ID:</label>
-              <input type="text" class="form-control" [(ngModel)]="carrera.id" name="id" [disabled]="enModoEdicion">
-              @if(mostrarErrores && (!carrera.id || carrera.id.trim().length === 0)){
-                <div class="text-danger">El ID es obligatorio</div>
-              }
-            </div>
+      <div class="card-body">
+        @if(errorMessage){
+          <div class="alert alert-danger">{{ errorMessage }}</div>
+        }
+        @if(successMessage){
+          <div class="alert alert-success">{{ successMessage }}</div>
+        }
+        @if(cargando){
+          <div class="alert alert-info">Procesando, por favor espere...</div>
+        }
+        
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="h5 mb-3">Alta de Carreras</h2>
+            
+            <form (submit)="$event.preventDefault(); enModoEdicion ? updateCarrera() : insertarCarrera()">
+              <div class="mb-3">
+                <label class="form-label">ID:</label>
+                <input type="text" class="form-control" [(ngModel)]="carrera.id" name="id" [disabled]="enModoEdicion">
+                @if(mostrarErrores && (!carrera.id || carrera.id.trim().length === 0)){
+                  <div class="text-danger">El ID es obligatorio</div>
+                }
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label">Nombre:</label>
-              <input type="text" class="form-control" [(ngModel)]="carrera.nombre" name="nombre">
-              @if(mostrarErrores && (!carrera.nombre || carrera.nombre.trim().length === 0)){
-                <div class="text-danger">El nombre es obligatorio</div>
-              }
-            </div>
+              <div class="mb-3">
+                <label class="form-label">Nombre:</label>
+                <input type="text" class="form-control" [(ngModel)]="carrera.nombre" name="nombre">
+                @if(mostrarErrores && (!carrera.nombre || carrera.nombre.trim().length === 0)){
+                  <div class="text-danger">El nombre es obligatorio</div>
+                }
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label">Facultad:</label>
-              <input type="text" class="form-control" [(ngModel)]="carrera.facultad" name="facultad">
-              @if(mostrarErrores && (!carrera.facultad || carrera.facultad.trim().length === 0)){
-                <div class="text-danger">La facultad es obligatoria</div>
-              }
-            </div>
+              <div class="mb-3">
+                <label class="form-label">Facultad:</label>
+                <input type="text" class="form-control" [(ngModel)]="carrera.facultad" name="facultad">
+                @if(mostrarErrores && (!carrera.facultad || carrera.facultad.trim().length === 0)){
+                  <div class="text-danger">La facultad es obligatoria</div>
+                }
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label">Duración:</label>
-              <input type="text" class="form-control" [(ngModel)]="carrera.duracion" name="duracion">
-              @if(mostrarErrores && (!carrera.duracion || carrera.duracion.trim().length === 0)){
-                <div class="text-danger">La duración es obligatoria</div>
-              }
-            </div>
+              <div class="mb-3">
+                <label class="form-label">Duración:</label>
+                <input type="text" class="form-control" [(ngModel)]="carrera.duracion" name="duracion">
+                @if(mostrarErrores && (!carrera.duracion || carrera.duracion.trim().length === 0)){
+                  <div class="text-danger">La duración es obligatoria</div>
+                }
+              </div>
 
-            <div class="d-flex gap-2 mb-4">
-              @if(!enModoEdicion){
-                <button type="submit" class="btn btn-primary" [disabled]="cargando">
-                  @if(cargando && !enModoEdicion){
-                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                    <span role="status">Guardando...</span>
-                  } @else {
-                    Alta de Carrera
-                  }
+              <div class="d-flex gap-2 mb-4">
+                @if(!enModoEdicion){
+                  <button type="submit" class="btn btn-primary" [disabled]="cargando">
+                    @if(cargando && !enModoEdicion){
+                      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                      <span role="status">Guardando...</span>
+                    } @else {
+                      Alta de Carrera
+                    }
+                  </button>
+                }
+                @if(enModoEdicion){
+                  <button type="submit" class="btn btn-warning" [disabled]="cargando">
+                    @if(cargando && enModoEdicion){
+                      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                      <span role="status">Actualizando...</span>
+                    } @else {
+                      Actualizar
+                    }
+                  </button>
+                  <button type="button" class="btn btn-danger" (click)="deleteCarrera()" [disabled]="cargando">
+                    Eliminar
+                  </button>
+                }
+                <button type="button" class="btn btn-secondary" (click)="clearSelection()" [disabled]="cargando">
+                  Limpiar Formulario
                 </button>
-              }
-              @if(enModoEdicion){
-                <button type="submit" class="btn btn-warning" [disabled]="cargando">
-                  @if(cargando && enModoEdicion){
-                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                    <span role="status">Actualizando...</span>
-                  } @else {
-                    Actualizar
-                  }
-                </button>
-                <button type="button" class="btn btn-danger" (click)="deleteCarrera()" [disabled]="cargando">
-                  Eliminar
-                </button>
-              }
-              <button type="button" class="btn btn-secondary" (click)="clearSelection()" [disabled]="cargando">
-                Limpiar Formulario
-              </button>
-            </div>
-          </form>
-        </div>
+              </div>
+            </form>
+          </div>
 
-        <div class="col-md-6">
-          <h2 class="h5 mb-3">Listado de Carreras</h2>
-          
-          @if(cargando && carreras.length === 0){
-            <div class="alert alert-info">Cargando carreras...</div>
-          } @else if(carreras.length === 0) {
-            <div class="alert alert-info">No hay carreras registradas</div>
-          } @else {
-            <div class="table-responsive">
-              <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                  <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Facultad</th>
-                    <th>Duración</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @for(carrera of carreras; track carrera.id){
+          <div class="col-md-6">
+            <h2 class="h5 mb-3">Listado de Carreras</h2>
+            
+            @if(cargando && carreras.length === 0){
+              <div class="alert alert-info">Cargando carreras...</div>
+            } @else if(carreras.length === 0) {
+              <div class="alert alert-info">No hay carreras registradas</div>
+            } @else {
+              <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead class="table-dark">
                     <tr>
-                      <td>{{ carrera.id }}</td>
-                      <td>{{ carrera.nombre }}</td>
-                      <td>{{ carrera.facultad }}</td>
-                      <td>{{ carrera.duracion }}</td>
-                      <td>
-                        <button type="button" class="btn btn-sm btn-success" 
-                                (click)="selectCarrera(carrera)" [disabled]="cargando">
-                          Seleccionar
-                        </button>
-                      </td>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                      <th>Facultad</th>
+                      <th>Duración</th>
+                      <th>Acciones</th>
                     </tr>
-                  }
-                </tbody>
-              </table>
-            </div>
-          }
+                  </thead>
+                  <tbody>
+                    @for(carrera of carreras; track carrera.id){
+                      <tr>
+                        <td>{{ carrera.id }}</td>
+                        <td>{{ carrera.nombre }}</td>
+                        <td>{{ carrera.facultad }}</td>
+                        <td>{{ carrera.duracion }}</td>
+                        <td>
+                          <button type="button" class="btn btn-sm btn-success" 
+                                  (click)="selectCarrera(carrera)" [disabled]="cargando">
+                            Seleccionar
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  } @else {
+    <div class="alert alert-warning text-center mt-5">
+      <h4><i class="bi bi-exclamation-triangle-fill me-2"></i>Acceso restringido</h4>
+      <p class="mb-0">Debes iniciar sesión para acceder al sistema de gestión de carreras</p>
+    </div>
+  }
 </div>

@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { EstudianteinscritoService } from '../../services/estudianteinscrito.service';
 import { CarreraService } from '../../services/carrera.service';
 import { EstudianteinscritoWithCarrera } from '../../models/estudianteinscrito.models';
-import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-estudianteinscrito',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './estudianteinscrito.component.html',
   styleUrls: ['./estudianteinscrito.component.css']
 })
@@ -16,15 +16,24 @@ export class EstudianteinscritoComponent implements OnInit {
   carreras: any[] = [];
   cargando = true;
   errorMessage: string | null = null;
+  estaAutenticado = false;
 
   constructor(
     private estudianteService: EstudianteinscritoService,
-    private carreraService: CarreraService
+    private carreraService: CarreraService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.cargarEstudiantes();
     this.cargarCarreras();
+    this.verificarAutenticacion();
+  }
+
+  private verificarAutenticacion() {
+    this.authService.user$.subscribe(user => {
+      this.estaAutenticado = !!user;
+    });
   }
 
   cargarEstudiantes(): void {
