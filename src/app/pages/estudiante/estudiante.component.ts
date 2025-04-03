@@ -23,7 +23,8 @@ export class EstudianteComponent {
     nombre: '',
     apellido: '',
     edad: '',
-    email: ''
+    email: '',
+    idOriginal: ''
   };
   mostrarErrores = false;
   enModoEdicion = false;
@@ -205,7 +206,8 @@ export class EstudianteComponent {
       nombre: '',
       apellido: '',
       edad: '',
-      email: ''
+      email: '',
+      idOriginal: ''
     };
     this.mostrarErrores = false;
     this.enModoEdicion = false;

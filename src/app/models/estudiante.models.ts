@@ -5,7 +5,7 @@ export interface Estudiante {
     apellido: string;
     edad: string;
     email: string;
-    idOriginal?: string; 
+    idOriginal: string; 
 }
 
 export interface EstudianteWithCarrera extends Estudiante {

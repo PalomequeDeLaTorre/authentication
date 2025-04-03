@@ -15,6 +15,7 @@ export class CarreraComponent {
   carreras: Carrera[] = [];
   carrera: Partial<Carrera> = {
     id: '',
+    idOriginal: '',
     facultad: '',
     nombre: '',
     duracion: ''
@@ -175,6 +176,7 @@ export class CarreraComponent {
   private resetForm() {
     this.carrera = {
       id: '',
+      idOriginal: '',
       facultad: '',
       nombre: '',
       duracion: ''

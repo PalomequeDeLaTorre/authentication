@@ -23,7 +23,7 @@
             <form (submit)="$event.preventDefault(); enModoEdicion ? updateEstudiante() : insertarEstudiante()">
               <div class="mb-3">
                 <label class="form-label">ID:</label>
-                <input type="text" class="form-control" [(ngModel)]="estudiante.id" name="id" [disabled]="enModoEdicion">
+                <input type="text" class="form-control" [(ngModel)]="estudiante.id" name="id" [readonly]="enModoEdicion && estudiante.idOriginal !== estudiante.id">
                 @if(mostrarErrores && (!estudiante.id || estudiante.id.trim().length === 0)){
                   <div class="text-danger">El ID es obligatorio</div>
                 }

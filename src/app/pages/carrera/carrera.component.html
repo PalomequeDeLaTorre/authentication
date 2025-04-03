@@ -24,7 +24,7 @@
               <div class="mb-3">
 
                   <label class="form-label">ID:</label>
-                  <input type="text" class="form-control" [(ngModel)]="carrera.id" name="id" [disabled]="enModoEdicion">
+                  <input type="text" class="form-control" [(ngModel)]="carrera.id" name="id" [readonly]="enModoEdicion && carrera.idOriginal !== carrera.id">
                   @if(mostrarErrores && (!carrera.id || carrera.id.trim().length === 0)){
                     <div class="text-danger">El ID es obligatorio</div>
                   }
@@ -67,7 +67,7 @@
                       <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                       <span role="status">Guardando...</span>
                     } @else {
-                      Alta de Carrera
+                      Registrar Carrera
                     }
                   </button>
                 }
