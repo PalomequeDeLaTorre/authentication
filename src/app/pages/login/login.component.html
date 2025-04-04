@@ -3,7 +3,7 @@
         <h1>Iniciar sesión</h1>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-email">
-                <span>Correo electronico</span>
+                <span>Correo electrónico</span>
                 @if (form.get('email')?.touched && form.get('email')?.errors) {
                     <input type="email" class="input-email-err" formControlName="email" placeholder="Error de validacion">
                 }
