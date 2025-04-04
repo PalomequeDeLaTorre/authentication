@@ -4,49 +4,42 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   imports: [FormsModule, ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent {
-
+export class RegisterComponent {
   error: boolean = false;
-  fb : FormBuilder = inject (FormBuilder);
+  fb: FormBuilder = inject(FormBuilder);
   auth: AuthService = inject(AuthService);
   router: Router = inject(Router);
 
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
-    password: ['', Validators.required]
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
-  onSubmit(){
+  onSubmit() {
     const rawValue = this.form.getRawValue();
-    this.auth.login(rawValue.email, rawValue.password).subscribe({
+    this.auth.register(rawValue.email, rawValue.password).subscribe({
       next: () => {
-        this.router.navigateByUrl('/home');
+        const confirmed = confirm('Registro exitoso. ¿Deseas Iniciar sesión ahora?');
+        if (confirmed) {
+          this.router.navigateByUrl('/home');
+        } else {
+          this.router.navigateByUrl('/login');
+        }
       },
-      error: (error) =>{
-        this.error = true
+      error: (error) => {
+        this.error = true;
         console.log('Error: ', error);
       }
     });
   }
-  navigateToRegister() {
-    this.router.navigateByUrl('/register');
-  }
 
-  onGoogleSignIn() {
-    this.auth.loginWithGoogle().then(
-      () => {
-        this.router.navigateByUrl('/home');
-      },
-      (error) => {
-        this.error = true;
-        console.error('Error en Google Sign-In: ', error);
-      }
-    );
+  navigateToLogin() {
+    this.router.navigateByUrl('/login');
   }
   
 }

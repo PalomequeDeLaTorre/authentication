@@ -1,23 +1,21 @@
-.login-container {
+.registro-container{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #252525;
     box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.262);
-  }
-  
-  
-  
-  .form-container{
+}
+
+.form-container{
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 35%;
     height: 500px;
     background-color: white;
-  }
-  
-  .register-container{
+}
+
+.register-container{
     width: 35%;
     height: 500px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,28 +23,28 @@
     justify-content: center;
     flex-direction: column;
     background-color: #e8ba03;
-  }
-  
-  
-  .form-container h1{
-    padding: 20px;
+}
+
+
+.form-container h1{
+    padding: 30px;
     font-size: 2em;
     font-weight: lighter;
-  }
-  .form-container span{
+}
+.form-container span{
     margin-left: 30px;
     margin-top: 20px;
     font-weight: bold;
     font-size: 0.9em;
-  }
-  
-  
-  .form-email, .form-password{
+}
+
+
+.form-email, .form-password{
     display: flex;
     flex-direction: column;
-  }
-  
-  .input-email, .input-password{
+}
+
+.input-email, .input-password{
     width: 85%;
     height: 40px;
     border: none; 
@@ -57,10 +55,10 @@
     padding-left: 15px;
     font-size: 0.7em;
     background-color: #f0f0f0;
-  
-  }
-  
-  .input-email-err, .input-password-err{
+
+}
+
+.input-email-err, .input-password-err{
     width: 85%;
     height: 40px;
     border-radius: 20px;
@@ -71,30 +69,23 @@
     padding-left: 15px;
     font-size: 0.7em;
     background-color: #f0f0f0;
-  }
-  
-  .input-email-err::placeholder, .input-password-err::placeholder{
+}
+
+.input-email-err::placeholder, .input-password-err::placeholder{
     color: red;
-  }
-  
-  
-  .buttons{
+}
+
+
+
+
+
+.buttons{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  
-  .buttons p{
-    display: flex;
-    justify-content: center;
-    font-size: 0.8em;
-    color: #a0a0a0;
-    margin-top: 15px;
-  }
-  
-  .btn-login{
+    margin-top: 30px;
+}
+
+.btn-login{
     width: 85%;
     height: 40px;
     background-color: #d8ad00;
@@ -103,14 +94,13 @@
     border-radius: 15px;
     cursor: pointer;
     margin-left: 30px;
-    margin-top: 20px;
-  }
-  
-  .btn-login:hover{
+}
+
+.btn-login:hover{
     background-color: #c39c01;
-  }
-  
-  .btn-nvg {
+}
+
+.btn-nvg {
     width: 120px;
     height: 40px;
     font-size: 0.7em;
@@ -122,13 +112,13 @@
     margin-left: 38%;
     text-align: center;
     transition: 0.3s ease-in-out;
-  }
-  
-  .btn-nvg:hover {
+}
+
+.btn-nvg:hover {
     background: rgba(255, 255, 255, 0.2); 
-  }
-  
-  .create-account{
+}
+
+.create-account{
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -136,12 +126,12 @@
     margin-top: 20px;
     color: white;
     font-size: 1.1em;
-  }
-  .create-account label{
+}
+.create-account label{
     margin-bottom: 20px;
-  }
-  
-  .register-container p{
+}
+
+.register-container p{
     padding: 15px;
     display: flex;
     text-align: center;
@@ -149,47 +139,12 @@
     color: white;
     font-size: 2em;
     font-weight: bold;
-  }
-  
-  .register-container h1{
+}
+.register-container h1{
     display: flex;
     text-align: center;
     justify-content: center;
     color: white;
     font-size: 1.5em;
     font-weight: normal;
-  }
-  
-  
-  .btn-registerWG {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    color: #757575;
-    border: 1px solid #dcdcdc;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    max-width: 300px;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .btn-registerWG img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
-  
-  .btn-registerWG:hover {
-    background-color: #f1f1f1;
-    border-color: #cfcfcf;
-  }
-  
-  .btn-registerWG:active {
-    background-color: #e1e1e1;
-    border-color: #bdbdbd;
-  }
+}

@@ -1,11 +1,20 @@
-<div class="login-container">
-    <div class="form-container">
-        <h1>Iniciar sesión</h1>
+<div class="registro-container">
+    
+    <div class="register-container">
+        <p>🎓 ¡Bienvenidos, Estudiantes! 📚</p>
+        <h1>A la Universidad del Río</h1>
+        <div class="create-account">
+            <label>¿Ya una tienes cuenta? </label>
+            <button class="btn-nvg" (click)="navigateToLogin()">Iniciar sesión</button>
+        </div>
+    </div>
+    <div class="form-container">    
+        <h1>Registrarse</h1>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-email">
                 <span>Correo electronico</span>
                 @if (form.get('email')?.touched && form.get('email')?.errors) {
-                    <input type="email" class="input-email-err" formControlName="email" placeholder="Error de validacion">
+                    <input type="email" class="input-email-err" formControlName="email" placeholder="Error de validacion" >
                 }
                 @else {
                     <input type="email" class="input-email" formControlName="email" placeholder="Correo electronico">
@@ -21,24 +30,12 @@
                 }
             </div>
             <p></p>
-            <button type="submit" class="btn-login">Iniciar sesión</button>
             <div class="buttons">
-                <p>__________________o__________________</p>
-                <button type="button" class="btn-registerWG" (click)="onGoogleSignIn()">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxS5iRASsr50ASJqYsyAvcew2ICajtSGVkJw&s" alt="google btn">
-                    Inicia sesión con Google
-                </button>
+                <button type="submit" class="btn-login">Registrarse</button>
             </div>
             
         </form>
-    </div>
-    <div class="register-container">
-        <p>🎓 ¡Bienvenidos, Estudiantes! 📚</p>
-        <h1>A la Universidad del Río</h1>
-        <div class="create-account">
-            <label>¿No tienes una cuenta? </label>
-            <button class="btn-nvg" (click)="navigateToRegister()">Registrate</button>
-        </div>
-    </div>
-</div>
 
+    </div>
+        
+</div>

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Auth, user, User, signInWithEmailAndPassword, signOut 
-} from '@angular/fire/auth';
-import { browserSessionPersistence, setPersistence } from 'firebase/auth';
+import { Auth, user, User, browserSessionPersistence,signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, setPersistence, signInWithPopup } from 'firebase/auth';
 import { from, Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   user$: Observable<User | null>;
 
   constructor(private firebaseAuth: Auth) {
@@ -28,6 +27,24 @@ export class AuthService {
     ).then(() => {
       console.log('usuario autenticado correctamente');
     });
+    return from(promise);
+  }
+  
+  //Método para el login con Google;
+
+  loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(this.firebaseAuth, provider);
+  }
+
+   // Método para registro
+   register(email: string, password: string): Observable<User> {
+    const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password)
+      .then((userCredential) => {
+        console.log('Usuario registrado correctamente');
+        return userCredential.user;
+      });
+
     return from(promise);
   }
 

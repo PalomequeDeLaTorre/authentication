@@ -5,6 +5,7 @@ import { authGuard } from './auth.guard';
 import { EstudianteComponent } from './pages/estudiante/estudiante.component';
 import { CarreraComponent } from './pages/carrera/carrera.component';
 import { EstudianteinscritoComponent } from './pages/estudianteinscrito/estudianteinscrito.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
     {
@@ -36,6 +37,11 @@ export const routes: Routes = [
                 pathMatch: 'full'
             }
         ]
+    },
+    {
+        path: 'register',
+        component: RegisterComponent,
+
     },
     {
         path: '**',
